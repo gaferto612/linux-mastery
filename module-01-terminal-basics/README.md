@@ -1,0 +1,79 @@
+# Module 01 — Terminal Basics
+
+**Phase:** Foundations
+**Estimated time:** 2 weeks (~6 hours)
+**Prerequisites:** None — you start here.
+
+---
+
+## What you'll learn
+
+By the end of this module, you'll be able to:
+
+- Navigate the Linux filesystem from the terminal without using a file manager
+- List, view, copy, move, and delete files using commands
+- Read `man` pages and find help for any command
+- Use shell shortcuts that make you 5× faster (history, tab completion, wildcards)
+- Understand what a "shell" actually is and why it matters
+
+---
+
+## Readings
+
+Pick the readings that match your appetite. Minimum is fine. If a topic confuses you, read it from multiple books — different authors explain it differently.
+
+| Priority | Book | Chapter |
+|---|---|---|
+| Required | **HLW** | Ch. 1 — The Big Picture |
+| Required | **HLW** | Ch. 2 — Basic Commands and Directory Hierarchy (§2.1–2.10) |
+| Recommended | **LCLSB** | Ch. 1 — Starting with Linux Shells |
+| Recommended | **LCLSB** | Ch. 3 — Basic Bash Shell Commands |
+| Optional deep-dive | **ULSAH** | Ch. 1 — Where to Start |
+
+---
+
+## Suggested weekly plan
+
+### Week 1 — Reading and orientation
+- Read HLW Ch. 1 and 2.
+- Boot up your lab VM. Open a terminal.
+- Just *play* — `ls`, `cd`, `pwd`. Look around. Don't break anything yet.
+- Start your notes file in `notes/`.
+
+### Week 2 — Exercises and mastery
+- Do all exercises in `exercises/`.
+- Check yourself against `solutions/`.
+- Write a short summary in your notes: "Three things I didn't know two weeks ago."
+- Commit your work to git.
+- Tick the box in `progress/tracker.md`.
+
+---
+
+## Key concepts to understand (not memorize)
+
+These are the *ideas*. The commands are vocabulary, but these are the grammar.
+
+1. **Everything is a path.** A file, a device, even a process — all addressable via the filesystem.
+2. **The shell is a program.** It reads what you type, parses it, runs it. That's it. There's no magic.
+3. **Commands are just programs.** `ls` is a file at `/usr/bin/ls`. You can find it. You can replace it.
+4. **The current directory is state.** You're always *somewhere*. `pwd` tells you where.
+5. **Standard input, output, error.** Three streams. Almost everything in Linux flows through them. (You'll deepen this in later modules.)
+
+---
+
+## Commands you should be able to use without thinking by the end
+
+`pwd`, `cd`, `ls`, `ls -la`, `cat`, `less`, `head`, `tail`, `cp`, `mv`, `rm`, `mkdir`, `rmdir`, `touch`, `man`, `which`, `whoami`, `clear`, `echo`, `history`
+
+Plus shortcuts: **Tab** (autocomplete), **↑/↓** (history), **Ctrl-C** (cancel), **Ctrl-L** (clear), **Ctrl-R** (search history).
+
+---
+
+## When you finish
+
+1. Complete every exercise in `exercises/`.
+2. Self-check against `solutions/`.
+3. Fill in your notes — at minimum: what surprised you, what's still fuzzy.
+4. Commit.
+5. Update `progress/tracker.md`.
+6. → Move on to [Module 02](../module-02-files-and-permissions/README.md).
