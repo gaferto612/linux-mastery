@@ -4,6 +4,8 @@
 
 ---
 
+**In this module:** [📋 Exercises](exercises/README.md) · [✅ Solutions](solutions/README.md) · [📝 Notes](notes/my-notes.md)
+
 ## ⚡ Power-on → login prompt
 
 ```

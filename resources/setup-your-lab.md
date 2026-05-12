@@ -101,3 +101,7 @@ cd linux-mastery
 (After you push it to GitHub — see [`github-setup.md`](github-setup.md).)
 
 Now go to [Module 01](../module-01-terminal-basics/README.md) and get started.
+
+---
+
+[← Back to course home](../README.md)

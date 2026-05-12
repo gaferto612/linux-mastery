@@ -125,3 +125,7 @@ find . -name '*.txt' -exec sed -i 's/old/new/g' {} +
 # Disk usage by directory
 du -h --max-depth=1 | sort -rh
 ```
+
+---
+
+[← Back to course home](../README.md)

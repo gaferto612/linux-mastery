@@ -109,3 +109,7 @@ sudo ufw disable
 6. Can curl a site? `curl -v https://example.com`
 
 If you get a "yes" then a "no", the layer between is broken.
+
+---
+
+[← Back to course home](../README.md)
