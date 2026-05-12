@@ -37,15 +37,29 @@ set -o pipefail ┘
 
 ## 🪤 trap — guaranteed cleanup
 
-```mermaid
-flowchart LR
-    A[script starts] --> B[mktemp tmpfile]
-    B --> T["trap 'rm -f $tmpfile' EXIT"]
-    T --> W[do work...]
-    W --> X{exit reason}
-    X -- normal exit --> C[cleanup runs]
-    X -- error / Ctrl-C / kill --> C
-    C --> Z([🟢 tmpfile gone])
+```
+  script starts
+       │
+       ▼
+  mktemp tmpfile
+       │
+       ▼
+  trap 'rm -f $tmpfile' EXIT
+       │
+       ▼
+  do work...
+       │
+       ▼
+  ┌──────────────┐
+  │ exit reason? │── normal exit ──┐
+  │              │── error ────────┤
+  │              │── Ctrl-C / kill ┤
+  └──────────────┘                 │
+                                   ▼
+                              cleanup runs
+                                   │
+                                   ▼
+                            🟢 tmpfile gone
 ```
 
 ---
@@ -93,3 +107,7 @@ In `exercises/`:
 - shellcheck gives you few warnings
 
 → [Module 07](../module-07-text-processing/README.md)
+
+---
+
+**Navigate:** [← Previous module](../module-05-shell-scripting-basics/README.md) · [🏠 Home](../README.md) · [Next module →](../module-07-text-processing/README.md)

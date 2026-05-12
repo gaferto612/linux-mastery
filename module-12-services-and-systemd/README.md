@@ -6,17 +6,17 @@
 
 ## 🧩 The systemd universe
 
-```mermaid
-flowchart LR
-    T[graphical.target] --> U1[multi-user.target]
-    U1 --> N[network-online.target]
-    U1 --> S1[ssh.service]
-    U1 --> S2[nginx.service]
-    U1 --> M1[mnt-data.mount]
-    U1 --> TM[backup.timer]
-    TM -.triggers.-> BK[backup.service]
-    S2 -.Requires=.-> M1
-    S2 -.After=.-> N
+```
+   graphical.target
+        │
+        ▼
+   multi-user.target
+        ├──▶ network-online.target
+        ├──▶ ssh.service
+        ├──▶ nginx.service ··Requires=··▶ mnt-data.mount
+        │                  ··After=·····▶ network-online.target
+        ├──▶ mnt-data.mount
+        └──▶ backup.timer ··triggers··▶ backup.service
 ```
 
 ```
@@ -47,13 +47,23 @@ WantedBy=multi-user.target             ← what 'enable' hooks into
 
 ## 🔁 Daily systemctl flow
 
-```mermaid
-flowchart LR
-    edit[edit /etc/systemd/system/foo.service] --> reload[systemctl daemon-reload]
-    reload --> enable[systemctl enable foo]
-    enable --> start[systemctl start foo]
-    start --> status[systemctl status foo]
-    status --> logs[journalctl -u foo -f]
+```
+   edit /etc/systemd/system/foo.service
+        │
+        ▼
+   systemctl daemon-reload
+        │
+        ▼
+   systemctl enable foo
+        │
+        ▼
+   systemctl start foo
+        │
+        ▼
+   systemctl status foo
+        │
+        ▼
+   journalctl -u foo -f
 ```
 
 > ⚠️ **Forgetting `daemon-reload` after editing a unit is the #1 systemd footgun.**
@@ -101,3 +111,7 @@ In `exercises/`:
 - You stop using `&` and `nohup` for things that should be services
 
 → [Module 13](../module-13-logging-and-monitoring/README.md)
+
+---
+
+**Navigate:** [← Previous module](../module-11-package-management/README.md) · [🏠 Home](../README.md) · [Next module →](../module-13-logging-and-monitoring/README.md)

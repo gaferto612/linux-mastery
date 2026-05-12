@@ -27,18 +27,29 @@
 
 ## 🔐 SSH login decision flow
 
-```mermaid
-flowchart TD
-    A[client connects] --> B{PermitRootLogin?}
-    B -- root + no --> X([❌ denied])
-    B -- ok --> C{PasswordAuth allowed?}
-    C -- no, key only --> K{valid key?}
-    K -- no --> X
-    K -- yes --> Y([✅ in])
-    C -- yes --> P{password ok?}
-    P -- no --> F[fail2ban counts strikes]
-    F --> X
-    P -- yes --> Y
+```
+   client connects
+        │
+        ▼
+   PermitRootLogin?
+     ├── root + no ───────────────▶ ❌ denied
+     └── ok
+          │
+          ▼
+       PasswordAuth allowed?
+          ├── no, key only
+          │      │
+          │      ▼
+          │   valid key?
+          │     ├── no ────────────▶ ❌ denied
+          │     └── yes ───────────▶ ✅ in
+          │
+          └── yes
+                 │
+                 ▼
+              password ok?
+                ├── no ─▶ fail2ban counts strikes ─▶ ❌ denied
+                └── yes ─────────────────────────▶ ✅ in
 ```
 
 ## ✅ The hardening checklist
@@ -98,3 +109,7 @@ In `exercises/`:
 - You know what to log and what to monitor
 
 → [Module 19](../module-19-intro-to-pentesting/README.md)
+
+---
+
+**Navigate:** [← Previous module](../module-17-files-and-io/README.md) · [🏠 Home](../README.md) · [Next module →](../module-19-intro-to-pentesting/README.md)

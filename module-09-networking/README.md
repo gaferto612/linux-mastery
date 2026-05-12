@@ -20,21 +20,18 @@
 
 ## 🌐 What happens when you `curl https://example.com`
 
-```mermaid
-sequenceDiagram
-    actor You
-    participant DNS as DNS resolver
-    participant Router
-    participant Server as example.com
-    You->>DNS: A? example.com
-    DNS-->>You: 93.184.216.34
-    You->>Router: TCP SYN → 93.184.216.34:443
-    Router->>Server: forwarded
-    Server-->>You: SYN-ACK
-    You->>Server: ACK + TLS ClientHello
-    Server-->>You: certificate + ServerHello
-    You->>Server: HTTP GET /
-    Server-->>You: 200 OK + HTML
+```
+   You              DNS resolver       Router          example.com
+    │                    │               │                  │
+    │── A? example.com ──▶               │                  │
+    │◀── 93.184.216.34 ──                │                  │
+    │── TCP SYN → 93.184.216.34:443 ────▶│                  │
+    │                    │               │── forwarded ────▶│
+    │◀──────────────────── SYN-ACK ─────────────────────────│
+    │── ACK + TLS ClientHello ─────────────────────────────▶│
+    │◀──────── certificate + ServerHello ───────────────────│
+    │── HTTP GET / ────────────────────────────────────────▶│
+    │◀───────────── 200 OK + HTML ──────────────────────────│
 ```
 
 ## 🩺 "I can't reach the server" — debug ladder
@@ -94,3 +91,7 @@ In `exercises/`:
 - You understand the difference between `0.0.0.0`, `127.0.0.1`, and your real IP
 
 → [Module 10](../module-10-storage-and-filesystems/README.md)
+
+---
+
+**Navigate:** [← Previous module](../module-08-users-and-groups/README.md) · [🏠 Home](../README.md) · [Next module →](../module-10-storage-and-filesystems/README.md)

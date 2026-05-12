@@ -22,19 +22,19 @@
 
 ## 🪄 How `cmd > out.txt` is implemented
 
-```mermaid
-sequenceDiagram
-    participant Shell
-    participant Child
-    participant Kernel
-    Shell->>Kernel: fork()
-    Note over Child: child starts, copy of shell
-    Child->>Kernel: fd = open("out.txt", O_WRONLY|O_CREAT|O_TRUNC)
-    Child->>Kernel: dup2(fd, 1)
-    Note over Child: now fd 1 (stdout) points to out.txt
-    Child->>Kernel: close(fd)
-    Child->>Kernel: execve("/bin/cmd", ...)
-    Note over Child: cmd writes to "stdout" — actually the file
+```
+   Shell             Child              Kernel
+     │                 │                   │
+     │── fork() ─────────────────────────▶│
+     │                 │ (child starts,    │
+     │                 │  copy of shell)   │
+     │                 │                   │
+     │                 │── fd = open("out.txt", O_WRONLY|O_CREAT|O_TRUNC) ─▶
+     │                 │── dup2(fd, 1) ───▶│
+     │                 │ (now fd 1/stdout points to out.txt)
+     │                 │── close(fd) ─────▶│
+     │                 │── execve("/bin/cmd", ...) ─▶
+     │                 │ (cmd writes to "stdout" — actually the file)
 ```
 
 ## 🪈 How `cmd1 | cmd2` is implemented
@@ -94,3 +94,7 @@ In `exercises/`:
 - You understand why "everything is a file" isn't just a slogan
 
 → [Module 18](../module-18-security-fundamentals/README.md)
+
+---
+
+**Navigate:** [← Previous module](../module-16-processes-and-signals/README.md) · [🏠 Home](../README.md) · [Next module →](../module-18-security-fundamentals/README.md)

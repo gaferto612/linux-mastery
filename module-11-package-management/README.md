@@ -6,17 +6,37 @@
 
 ## 📦 What "apt install nginx" actually does
 
-```mermaid
-flowchart TD
-    A[apt install nginx] --> B[read /etc/apt/sources.list*]
-    B --> C[fetch package index from repo]
-    C --> D[resolve dependency graph]
-    D --> E["download .deb files<br/>(cached in /var/cache/apt)"]
-    E --> F[verify signatures GPG]
-    F --> G[run preinst scripts]
-    G --> H[unpack files onto /]
-    H --> I[run postinst scripts<br/>e.g. enable service]
-    I --> J([✅ nginx ready])
+```
+   apt install nginx
+        │
+        ▼
+   read /etc/apt/sources.list*
+        │
+        ▼
+   fetch package index from repo
+        │
+        ▼
+   resolve dependency graph
+        │
+        ▼
+   download .deb files
+   (cached in /var/cache/apt)
+        │
+        ▼
+   verify signatures (GPG)
+        │
+        ▼
+   run preinst scripts
+        │
+        ▼
+   unpack files onto /
+        │
+        ▼
+   run postinst scripts
+   (e.g. enable service)
+        │
+        ▼
+   ✅ nginx ready
 ```
 
 ## 🆚 The package-manager rosetta stone
@@ -75,3 +95,7 @@ In `exercises/`:
 - You understand why "curl | sudo bash" is a bad idea
 
 → [Module 12](../module-12-services-and-systemd/README.md)
+
+---
+
+**Navigate:** [← Previous module](../module-10-storage-and-filesystems/README.md) · [🏠 Home](../README.md) · [Next module →](../module-12-services-and-systemd/README.md)

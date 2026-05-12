@@ -8,19 +8,30 @@
 
 ## 🖥️ How your keystrokes become actions
 
-```mermaid
-sequenceDiagram
-    actor You
-    participant Terminal as Terminal Emulator
-    participant Shell as Bash (the shell)
-    participant Kernel
-    You->>Terminal: types "ls /etc"
-    Terminal->>Shell: line of text
-    Shell->>Shell: parse & expand
-    Shell->>Kernel: execve("/usr/bin/ls", ["ls","/etc"])
-    Kernel-->>Terminal: program output
-    Terminal-->>You: pixels on screen
 ```
+You              Terminal Emulator        Bash (the shell)        Kernel
+ │                       │                        │                  │
+ │  types "ls /etc"      │                        │                  │
+ │──────────────────────>│                        │                  │
+ │                       │   line of text         │                  │
+ │                       │───────────────────────>│                  │
+ │                       │                        │ parse & expand   │
+ │                       │                        │──────┐           │
+ │                       │                        │<─────┘           │
+ │                       │                        │ execve("/usr/bin/ls", ["ls","/etc"])
+ │                       │                        │─────────────────>│
+ │                       │        program output                     │
+ │                       │<──────────────────────────────────────────│
+ │   pixels on screen    │                                           │
+ │<──────────────────────│                                           │
+```
+
+1. You type `ls /etc` into the terminal emulator.
+2. The terminal sends the line of text to the shell (bash).
+3. The shell parses and expands the line.
+4. The shell calls the kernel: `execve("/usr/bin/ls", ["ls","/etc"])`.
+5. The kernel runs the program and sends output back to the terminal.
+6. The terminal draws pixels on your screen.
 
 > **Mental model:** the shell is just another program. Its only job is to read what you type, turn it into a syscall, and print the result.
 
@@ -113,3 +124,7 @@ Plus shortcuts: **Tab** (autocomplete), **↑/↓** (history), **Ctrl-C** (cance
 4. Commit.
 5. Update `progress/tracker.md`.
 6. → Move on to [Module 02](../module-02-files-and-permissions/README.md).
+
+---
+
+**Navigate:** — · [🏠 Home](../README.md) · [Next module →](../module-02-files-and-permissions/README.md)

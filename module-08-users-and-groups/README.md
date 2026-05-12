@@ -28,18 +28,32 @@ sudo : x : 27 : alice,bob
 
 ## 🔐 sudo decision flow
 
-```mermaid
-flowchart TD
-    A[alice runs: sudo apt update] --> B{is alice in /etc/sudoers?}
-    B -- no --> X([❌ logged, denied])
-    B -- yes --> C{rule allows this command?}
-    C -- no --> X
-    C -- yes --> D{NOPASSWD set?}
-    D -- no --> P[prompt password]
-    P -- correct --> R[run as root]
-    P -- wrong --> X
-    D -- yes --> R
-    R --> L([✅ logged in journal])
+```
+  alice runs: sudo apt update
+         │
+         ▼
+  ┌──────────────────────────────┐
+  │ is alice in /etc/sudoers?    │── no ──> ❌ logged, denied
+  └──────────────────────────────┘
+         │ yes
+         ▼
+  ┌──────────────────────────────┐
+  │ rule allows this command?    │── no ──> ❌ logged, denied
+  └──────────────────────────────┘
+         │ yes
+         ▼
+  ┌──────────────────────────────┐
+  │ NOPASSWD set?                │── yes ──┐
+  └──────────────────────────────┘         │
+         │ no                               │
+         ▼                                  │
+  prompt password ── wrong ──> ❌ denied    │
+         │ correct                          │
+         ▼                                  │
+   run as root <─────────────────────────── ┘
+         │
+         ▼
+   ✅ logged in journal
 ```
 
 ---
@@ -84,3 +98,7 @@ In `exercises/`:
 - You'd never put `NOPASSWD: ALL` in sudoers for a regular user
 
 → [Module 09](../module-09-networking/README.md)
+
+---
+
+**Navigate:** [← Previous module](../module-07-text-processing/README.md) · [🏠 Home](../README.md) · [Next module →](../module-09-networking/README.md)

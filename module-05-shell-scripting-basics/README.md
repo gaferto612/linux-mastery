@@ -25,15 +25,28 @@
 
 ## 🔀 Control flow at a glance
 
-```mermaid
-flowchart LR
-    start([read input]) --> cond{condition?}
-    cond -- true --> then[then-branch]
-    cond -- false --> else[else-branch]
-    then --> loop{more items?}
-    else --> loop
-    loop -- yes --> cond
-    loop -- no --> done([exit 0])
+```
+  (read input)
+       │
+       ▼
+  ┌─────────────┐
+  │ condition?  │
+  └─────────────┘
+    │         │
+ true        false
+    │         │
+    ▼         ▼
+ then-branch  else-branch
+    │         │
+    └────┬────┘
+         ▼
+   ┌──────────────┐
+   │ more items?  │──── yes ───> back to "condition?"
+   └──────────────┘
+         │
+         no
+         ▼
+      (exit 0)
 ```
 
 ## 🚰 Streams & redirection
@@ -95,3 +108,7 @@ In `exercises/` — you'll build progressively:
 - `man bash` is no longer terrifying (just intimidating)
 
 → [Module 06](../module-06-shell-scripting-advanced/README.md)
+
+---
+
+**Navigate:** [← Previous module](../module-04-how-linux-boots/README.md) · [🏠 Home](../README.md) · [Next module →](../module-06-shell-scripting-advanced/README.md)

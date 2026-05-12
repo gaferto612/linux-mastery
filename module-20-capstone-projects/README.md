@@ -10,30 +10,23 @@ A capstone is **proof of skill** — to yourself, to future employers, to your f
 
 ## 🛤️ Pick your path
 
-```mermaid
-flowchart TB
-    Start([🎓 You finished modules 1-19]) --> Pick{Where do you<br/>want to go?}
-    Pick --> A[Path A · SysAdmin / DevOps]
-    Pick --> B[Path B · Systems Programming]
-    Pick --> C[Path C · Security]
-    A --> A1[Self-hosted web service]
-    A --> A2[Ansible IaC starter]
-    A --> A3[Prometheus + Grafana<br/>monitoring dashboard]
-    B --> B1[Mini shell in C]
-    B --> B2[File-watcher daemon]
-    B --> B3[Custom systemd service]
-    C --> C1[Harden + audit your VPS]
-    C --> C2[Pentest your own lab<br/>+ write the report]
-    C --> C3[Build a honeypot]
-    A1 --> Done([📦 ship to GitHub])
-    A2 --> Done
-    A3 --> Done
-    B1 --> Done
-    B2 --> Done
-    B3 --> Done
-    C1 --> Done
-    C2 --> Done
-    C3 --> Done
+```
+   🎓 You finished modules 1-19
+              │
+              ▼
+   Where do you want to go?
+              │
+     ┌────────┼────────────────────────┐
+     ▼        ▼                        ▼
+   Path A · SysAdmin / DevOps   Path B · Systems Programming   Path C · Security
+     │                            │                                │
+     ├──▶ Self-hosted web service ├──▶ Mini shell in C             ├──▶ Harden + audit your VPS
+     ├──▶ Ansible IaC starter     ├──▶ File-watcher daemon         ├──▶ Pentest your own lab
+     └──▶ Prometheus + Grafana    └──▶ Custom systemd service      │      + write the report
+          monitoring dashboard                                     └──▶ Build a honeypot
+                                          │
+                                          ▼
+                                  📦 ship to GitHub
 ```
 
 ## 🏁 Definition of "done"
@@ -145,3 +138,7 @@ When you're done with your capstone(s), write a final entry in `progress/tracker
 That's the close of this course. Linux is a deep well — you've drawn enough to know how the bucket works. From here, it's just more drawing.
 
 Good luck. ✊
+
+---
+
+**Navigate:** [← Previous module](../module-19-intro-to-pentesting/README.md) · [🏠 Home](../README.md) · —
