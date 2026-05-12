@@ -3,6 +3,14 @@
 A structured, beginner-friendly path from "I've opened a terminal" to "I understand how Linux really works."
 Built around five classic books, designed for ~3 hours/week.
 
+## Where to start
+
+→ [**Module 01 — Terminal basics**](module-01-terminal-basics/README.md)
+
+Good luck. You'll be surprised how far you get in a year.
+
+---
+
 ```
 ┌───────────────────────────────────────────────────────────────────────┐
 │                                                                       │
@@ -204,8 +212,4 @@ Quick references you can keep open while you work:
 
 ---
 
-## Where to start
-
-→ [Module 01 — Terminal basics](module-01-terminal-basics/README.md)
-
-Good luck. You'll be surprised how far you get in a year.
+→ Ready to begin? [**Start with Module 01**](module-01-terminal-basics/README.md).
