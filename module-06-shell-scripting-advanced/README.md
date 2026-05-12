@@ -2,6 +2,54 @@
 
 **Phase:** Bash scripting · **Time:** ~2 weeks · **Prereq:** Module 05
 
+---
+
+## 🛡️ The "safe bash" headers — what each flag does
+
+```
+#!/bin/bash
+set -e          ┐
+set -u          ├─ or simply:  set -euo pipefail
+set -o pipefail ┘
+```
+
+```
+  -e   exit on any error           (no more silently-failing scripts)
+  -u   error on unset variables    (catches typos in $foo vs $fooo)
+  -o pipefail
+       pipeline fails if ANY stage fails
+       (otherwise only the last command's status counts)
+```
+
+## ✨ Parameter expansion mini-cheatsheet
+
+```
+  ${var}              value of var
+  ${var:-default}     use default if var unset/empty
+  ${var:=default}     same, and ASSIGN default
+  ${var:?err msg}     error out with message if unset
+  ${#var}             length
+  ${var%.txt}         strip suffix    ".txt"
+  ${var##*/}          strip prefix to last "/"  (basename)
+  ${var//foo/bar}     replace ALL "foo" with "bar"
+  ${var^^}            uppercase   ${var,,} lowercase
+```
+
+## 🪤 trap — guaranteed cleanup
+
+```mermaid
+flowchart LR
+    A[script starts] --> B[mktemp tmpfile]
+    B --> T["trap 'rm -f $tmpfile' EXIT"]
+    T --> W[do work...]
+    W --> X{exit reason}
+    X -- normal exit --> C[cleanup runs]
+    X -- error / Ctrl-C / kill --> C
+    C --> Z([🟢 tmpfile gone])
+```
+
+---
+
 ## What you'll learn
 
 - Functions and return values

@@ -2,6 +2,57 @@
 
 **Phase:** Systems programming · **Time:** ~3 weeks · **Prereq:** Module 16
 
+---
+
+## 🔢 What a file descriptor really is
+
+```
+   process                  kernel
+   ┌─────────────┐          ┌────────────────────┐         ┌──────────┐
+   │ fd table    │          │ open-file table    │         │ inodes   │
+   │ ───────────  │          │ ──────────────────  │         │ ──────── │
+   │ 0 → ─┐      │          │ (offset, flags, ...)│         │ /etc/foo │
+   │ 1 → ─┼──────┼─────────►│ entry A             │────────►│   "abc"  │
+   │ 2 → ─┘      │          │                     │         │          │
+   │ 3 → ────────┼─────────►│ entry B             │────────►│ /tmp/bar │
+   └─────────────┘          └────────────────────┘         └──────────┘
+
+  0 = stdin   1 = stdout   2 = stderr   3,4,5… = anything you open()
+```
+
+## 🪄 How `cmd > out.txt` is implemented
+
+```mermaid
+sequenceDiagram
+    participant Shell
+    participant Child
+    participant Kernel
+    Shell->>Kernel: fork()
+    Note over Child: child starts, copy of shell
+    Child->>Kernel: fd = open("out.txt", O_WRONLY|O_CREAT|O_TRUNC)
+    Child->>Kernel: dup2(fd, 1)
+    Note over Child: now fd 1 (stdout) points to out.txt
+    Child->>Kernel: close(fd)
+    Child->>Kernel: execve("/bin/cmd", ...)
+    Note over Child: cmd writes to "stdout" — actually the file
+```
+
+## 🪈 How `cmd1 | cmd2` is implemented
+
+```
+   pipe()  →  creates two fds: [read_end, write_end]
+                                    │            │
+   fork twice; in each child rewire stdio with dup2:
+                                    │            │
+        cmd1     stdout (fd 1)  ────┤            │
+                                    │            │
+        cmd2     stdin  (fd 0)  ────┘────────────┤
+```
+
+That's the entire magic behind shell pipelines.
+
+---
+
 ## What you'll learn
 
 - File descriptors — what they really are

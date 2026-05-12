@@ -2,6 +2,64 @@
 
 **Phase:** System administration · **Time:** ~2 weeks · **Prereq:** Module 11
 
+---
+
+## 🧩 The systemd universe
+
+```mermaid
+flowchart LR
+    T[graphical.target] --> U1[multi-user.target]
+    U1 --> N[network-online.target]
+    U1 --> S1[ssh.service]
+    U1 --> S2[nginx.service]
+    U1 --> M1[mnt-data.mount]
+    U1 --> TM[backup.timer]
+    TM -.triggers.-> BK[backup.service]
+    S2 -.Requires=.-> M1
+    S2 -.After=.-> N
+```
+
+```
+   Unit types you'll meet:
+     .service  → daemons / one-shot programs
+     .timer    → scheduled triggers (cron's modern cousin)
+     .mount    → filesystem mounts
+     .target   → group of units (= old "runlevels")
+     .socket   → on-demand activation
+```
+
+## 📝 A minimal .service file — annotated
+
+```
+[Unit]
+Description=My backup job
+After=network-online.target            ← order: start AFTER network
+Requires=network-online.target         ← hard dep: fail if missing
+
+[Service]
+Type=oneshot                           ← runs, exits, done
+ExecStart=/usr/local/bin/backup.sh
+User=backup                            ← drop privileges!
+
+[Install]
+WantedBy=multi-user.target             ← what 'enable' hooks into
+```
+
+## 🔁 Daily systemctl flow
+
+```mermaid
+flowchart LR
+    edit[edit /etc/systemd/system/foo.service] --> reload[systemctl daemon-reload]
+    reload --> enable[systemctl enable foo]
+    enable --> start[systemctl start foo]
+    start --> status[systemctl status foo]
+    status --> logs[journalctl -u foo -f]
+```
+
+> ⚠️ **Forgetting `daemon-reload` after editing a unit is the #1 systemd footgun.**
+
+---
+
 ## What you'll learn
 
 - The systemd model: units, targets, dependencies

@@ -8,6 +8,46 @@ A capstone is **proof of skill** — to yourself, to future employers, to your f
 
 ---
 
+## 🛤️ Pick your path
+
+```mermaid
+flowchart TB
+    Start([🎓 You finished modules 1-19]) --> Pick{Where do you<br/>want to go?}
+    Pick --> A[Path A · SysAdmin / DevOps]
+    Pick --> B[Path B · Systems Programming]
+    Pick --> C[Path C · Security]
+    A --> A1[Self-hosted web service]
+    A --> A2[Ansible IaC starter]
+    A --> A3[Prometheus + Grafana<br/>monitoring dashboard]
+    B --> B1[Mini shell in C]
+    B --> B2[File-watcher daemon]
+    B --> B3[Custom systemd service]
+    C --> C1[Harden + audit your VPS]
+    C --> C2[Pentest your own lab<br/>+ write the report]
+    C --> C3[Build a honeypot]
+    A1 --> Done([📦 ship to GitHub])
+    A2 --> Done
+    A3 --> Done
+    B1 --> Done
+    B2 --> Done
+    B3 --> Done
+    C1 --> Done
+    C2 --> Done
+    C3 --> Done
+```
+
+## 🏁 Definition of "done"
+
+```
+   [ ] runs from a clean install / clean VM
+   [ ] README a stranger can follow end-to-end
+   [ ] reproducible: scripts / playbooks / Dockerfile, not "I did stuff"
+   [ ] failure modes documented (what breaks, how to recover)
+   [ ] you can demo it on a call without hand-waving
+```
+
+---
+
 ## Why capstones matter
 
 The modules taught you skills in isolation. Real Linux work is integrated: a problem requires shell scripting *and* networking *and* permissions *and* systemd, all at once. Capstones force that integration.

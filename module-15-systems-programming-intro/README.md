@@ -2,6 +2,69 @@
 
 **Phase:** Systems programming · **Time:** ~2 weeks · **Prereq:** Module 14
 
+---
+
+## 🚪 The kernel / user-space boundary
+
+```
+   ┌──────────────────────────────────────────────────┐
+   │              USER SPACE                          │
+   │   your_program  ←→  libc (printf, fopen, ...)    │
+   │                          │                       │
+   │                          │ syscall instruction   │
+   ╞══════════════════════════╪═══════════════════════╡
+   │                          ▼                       │
+   │              KERNEL SPACE                        │
+   │   read()  write()  open()  fork()  execve() ...  │
+   │   │                                              │
+   │   ▼  drivers, schedulers, filesystems, network   │
+   │   hardware                                       │
+   └──────────────────────────────────────────────────┘
+```
+
+```
+   man 1 ls     →  the command
+   man 2 read   →  a SYSCALL          (kernel interface)
+   man 3 printf →  a LIBRARY function (in libc, runs in user space)
+```
+
+## 🔬 strace: watching the boundary
+
+```mermaid
+sequenceDiagram
+    participant App as ./hello
+    participant libc
+    participant Kernel
+    App->>libc: printf("hi\n")
+    libc->>libc: format string
+    libc->>Kernel: write(1, "hi\n", 3)
+    Kernel-->>libc: 3
+    libc-->>App: returns 3
+    Note over App,Kernel: strace shows the write() call,<br/>not the printf().
+```
+
+## 🧠 Process memory layout
+
+```
+   high addresses
+   ┌──────────────────┐
+   │   stack ▼ grows  │   local vars, function calls
+   ├──────────────────┤
+   │                  │
+   │     (free)       │
+   │                  │
+   ├──────────────────┤
+   │   heap  ▲ grows  │   malloc()'d memory
+   ├──────────────────┤
+   │   bss            │   zero-init globals
+   │   data           │   initialized globals
+   │   text           │   the program code (read-only)
+   └──────────────────┘
+   low addresses
+```
+
+---
+
 ## What you'll learn
 
 - C basics for Linux: compile, link, run

@@ -2,6 +2,42 @@
 
 **Phase:** How Linux actually works · **Time:** ~3 weeks · **Prereq:** Module 03
 
+---
+
+## ⚡ Power-on → login prompt
+
+```mermaid
+flowchart TB
+    A[🔌 Power on] --> B["BIOS / UEFI<br/>POST + find boot device"]
+    B --> C["Bootloader (GRUB)<br/>loads kernel + initramfs"]
+    C --> D["Linux kernel<br/>self-init, drivers, mount initramfs"]
+    D --> E["initramfs<br/>tiny RAM filesystem"]
+    E --> F["Pivot to real /<br/>(your actual disk)"]
+    F --> G["PID 1 · systemd<br/>brings up units"]
+    G --> H["multi-user.target<br/>or graphical.target"]
+    H --> I[🖥️  login prompt]
+```
+
+## 🎯 systemd targets at a glance
+
+```
+emergency.target   →  single shell, no services       (rescue mini)
+rescue.target      →  single user, basic services
+multi-user.target  →  full system, no GUI             (servers live here)
+graphical.target   →  multi-user + display manager    (your laptop)
+```
+
+## 🛠️ Boot-debug toolbox
+
+| When boot fails… | Reach for |
+|---|---|
+| Kernel can't start | edit GRUB entry with `e`, add `init=/bin/sh` |
+| Services hang | `systemd-analyze blame`, `systemd-analyze critical-chain` |
+| Cryptic kernel msg | `dmesg`, `journalctl -k -b` |
+| Last boot's logs | `journalctl -b -1` |
+
+---
+
 ## What you'll learn
 
 - The boot sequence end-to-end: BIOS/UEFI → bootloader → kernel → init → login

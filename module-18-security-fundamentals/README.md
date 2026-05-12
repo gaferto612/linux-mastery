@@ -2,6 +2,60 @@
 
 **Phase:** Security · **Time:** ~3 weeks · **Prereq:** Module 17
 
+---
+
+## 🧅 Defense in depth — the onion
+
+```
+            ┌────────────────────────────────────┐
+            │     Physical / cloud account       │
+            │  ┌──────────────────────────────┐  │
+            │  │   Network: firewall, VPN     │  │
+            │  │  ┌────────────────────────┐  │  │
+            │  │  │  Host: SSH keys, patch │  │  │
+            │  │  │ ┌──────────────────┐   │  │  │
+            │  │  │ │ App: input val.  │   │  │  │
+            │  │  │ │ ┌──────────────┐ │   │  │  │
+            │  │  │ │ │ Data: 🔒 enc.│ │   │  │  │
+            │  │  │ │ └──────────────┘ │   │  │  │
+            │  │  │ └──────────────────┘   │  │  │
+            │  │  └────────────────────────┘  │  │
+            │  └──────────────────────────────┘  │
+            └────────────────────────────────────┘
+            One layer fails → others still hold.
+```
+
+## 🔐 SSH login decision flow
+
+```mermaid
+flowchart TD
+    A[client connects] --> B{PermitRootLogin?}
+    B -- root + no --> X([❌ denied])
+    B -- ok --> C{PasswordAuth allowed?}
+    C -- no, key only --> K{valid key?}
+    K -- no --> X
+    K -- yes --> Y([✅ in])
+    C -- yes --> P{password ok?}
+    P -- no --> F[fail2ban counts strikes]
+    F --> X
+    P -- yes --> Y
+```
+
+## ✅ The hardening checklist
+
+```
+   [ ] SSH:  key-only, no root, non-standard port? optional
+   [ ] firewall: default deny, allow only what's needed
+   [ ] fail2ban for SSH (and any other public service)
+   [ ] unattended-upgrades / automatic patching
+   [ ] sudoers: per-user, no NOPASSWD: ALL
+   [ ] no secrets in env / shell history / git
+   [ ] audit: auditd, lynis scan, regular log review
+   [ ] backups (you reviewed them, right?)
+```
+
+---
+
 ## What you'll learn
 
 - The threat model: who, what, why

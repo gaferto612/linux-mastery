@@ -4,6 +4,43 @@
 
 ---
 
+## 🔐 The permission infographic
+
+```
+                user   group  other
+            ┌───────┬───────┬───────┐
+  rwxr-x--- │  rwx  │  r-x  │  ---  │
+            └───┬───┴───┬───┴───┬───┘
+                │       │       │
+                7       5       0      ←  chmod 750
+
+      r = 4    w = 2    x = 1     (add them up)
+```
+
+| Symbol | Meaning on file  | Meaning on directory          |
+|--------|------------------|-------------------------------|
+| `r`    | read contents    | list entries                  |
+| `w`    | modify contents  | create/delete entries         |
+| `x`    | execute as program | enter the directory (`cd`)  |
+
+## 🔗 Hard link vs symlink
+
+```mermaid
+flowchart LR
+    subgraph Hardlink["Hard link — two names, one inode"]
+        A1[name: foo.txt] --> I1[(inode #42<br/>data blocks)]
+        A2[name: bar.txt] --> I1
+    end
+    subgraph Symlink["Symlink — pointer to a name"]
+        B1[name: foo.txt] --> I2[(inode #99)]
+        B2[name: link.txt] -. points to .-> B1
+    end
+```
+
+> Delete `foo.txt`: hard-linked `bar.txt` still works. Symlinked `link.txt` becomes a dangling pointer.
+
+---
+
 ## What you'll learn
 
 - The Linux filesystem hierarchy: what lives where and why

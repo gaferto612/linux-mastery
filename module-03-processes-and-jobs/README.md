@@ -2,6 +2,51 @@
 
 **Phase:** Foundations · **Time:** ~2 weeks · **Prereq:** Module 02
 
+---
+
+## 🔄 The life of a process
+
+```mermaid
+stateDiagram-v2
+    [*] --> Running: fork() + exec()
+    Running --> Sleeping: waits for I/O
+    Sleeping --> Running: I/O ready
+    Running --> Stopped: Ctrl-Z / SIGSTOP
+    Stopped --> Running: fg / bg / SIGCONT
+    Running --> Zombie: exit()
+    Zombie --> [*]: parent calls wait()
+```
+
+## 📡 Common signals — the cheat card
+
+```
+┌─────────┬─────┬─────────────────────────────────────────────┐
+│ SIGINT  │  2  │ Ctrl-C — "please stop"                      │
+│ SIGTSTP │ 20  │ Ctrl-Z — suspend (resumable)                │
+│ SIGTERM │ 15  │ default kill — "please clean up and exit"   │
+│ SIGHUP  │  1  │ terminal closed / "reload your config"      │
+│ SIGKILL │  9  │ unblockable, ungraceful — "die now"         │
+│ SIGCONT │ 18  │ "continue if stopped"                       │
+└─────────┴─────┴─────────────────────────────────────────────┘
+```
+
+> 🧠 `kill` is a misnomer — it just sends a signal. `kill -9` is the nuclear option because SIGKILL can't be caught or handled.
+
+## 🌲 The process tree
+
+```mermaid
+flowchart TD
+    init["PID 1 · systemd"] --> sshd["sshd"] --> bash["your bash"]
+    bash --> vim["vim"]
+    bash --> ls["ls"]
+    init --> cron["cron"]
+    init --> nginx["nginx (master)"]
+    nginx --> w1["worker 1"]
+    nginx --> w2["worker 2"]
+```
+
+---
+
 ## What you'll learn
 
 - What a process is and how to see what's running
