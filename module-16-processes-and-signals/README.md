@@ -2,6 +2,58 @@
 
 **Phase:** Systems programming · **Time:** ~3 weeks · **Prereq:** Module 15
 
+---
+
+## 🍴 fork() returns twice — the mind-bender
+
+```mermaid
+flowchart TB
+    A[parent: pid=100] -->|fork| split{ }
+    split -->|returns child's pid 101| P[parent continues<br/>pid=100]
+    split -->|returns 0| C[child runs<br/>pid=101]
+    C -->|exec ls| C2[/usr/bin/ls now runs<br/>same pid=101/]
+    P -->|wait| W[blocks until child exits]
+    C2 -->|exit| W
+    W --> Z[parent resumes]
+```
+
+```c
+pid_t pid = fork();
+if (pid == 0)         { /* child  */ execvp("ls", argv); }
+else if (pid > 0)     { /* parent */ wait(NULL); }
+else                  { /* error  */ perror("fork"); }
+```
+
+## 🧟 The zombie lifecycle
+
+```
+   child: exit(42)
+        │
+        ▼
+   ┌────────────────┐
+   │ ZOMBIE         │  ← exit status sits in process table,
+   │ (no resources, │     waiting for parent to read it
+   │  just a slot)  │
+   └───────┬────────┘
+           │  parent calls wait() / waitpid()
+           ▼
+       reaped — slot freed
+```
+
+> If the parent **never** waits → permanent zombies → eventually exhaust PIDs. If the parent **dies first** → child is reparented to PID 1 (which waits for everybody).
+
+## 📡 Signal-handler safety
+
+```
+   Inside a signal handler, you may only call
+   "async-signal-safe" functions (write, _exit, signal, ...).
+
+   ❌  printf, malloc, fprintf  ← NOT safe — buffers, locks
+   ✅  write(STDOUT_FILENO, ...)  ← safe — direct syscall
+```
+
+---
+
 ## What you'll learn
 
 - `fork()`, `exec()`, `wait()` — how Linux really starts processes

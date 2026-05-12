@@ -2,6 +2,39 @@
 
 **Phase:** System administration · **Time:** ~1 week · **Prereq:** Module 10
 
+---
+
+## 📦 What "apt install nginx" actually does
+
+```mermaid
+flowchart TD
+    A[apt install nginx] --> B[read /etc/apt/sources.list*]
+    B --> C[fetch package index from repo]
+    C --> D[resolve dependency graph]
+    D --> E["download .deb files<br/>(cached in /var/cache/apt)"]
+    E --> F[verify signatures GPG]
+    F --> G[run preinst scripts]
+    G --> H[unpack files onto /]
+    H --> I[run postinst scripts<br/>e.g. enable service]
+    I --> J([✅ nginx ready])
+```
+
+## 🆚 The package-manager rosetta stone
+
+```
+                  Debian/Ubuntu     RHEL/Fedora      Arch
+                  ─────────────     ───────────      ────
+   refresh index  apt update        dnf check-update pacman -Sy
+   install        apt install X     dnf install X    pacman -S X
+   remove         apt remove X      dnf remove X     pacman -R X
+   upgrade all    apt upgrade       dnf upgrade      pacman -Syu
+   search         apt search X      dnf search X     pacman -Ss X
+   owns this file dpkg -S /path     rpm -qf /path    pacman -Qo /path
+   list files     dpkg -L pkg       rpm -ql pkg      pacman -Ql pkg
+```
+
+---
+
 ## What you'll learn
 
 - How package managers actually work: repos, packages, dependencies

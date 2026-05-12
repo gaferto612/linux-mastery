@@ -3,6 +3,44 @@
 A structured, beginner-friendly path from "I've opened a terminal" to "I understand how Linux really works."
 Built around five classic books, designed for ~3 hours/week.
 
+```
+┌───────────────────────────────────────────────────────────────────────┐
+│                                                                       │
+│   MONTH:  1   2   3   4   5   6   7   8   9   10  11  12              │
+│   PHASE: [Foundations ][Boot][ Scripting ][   SysAdmin   ][SysProg][Sec]│
+│   YOU →  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  🎓 │
+│                                                                       │
+└───────────────────────────────────────────────────────────────────────┘
+```
+
+## 🗺️ Visual roadmap
+
+```mermaid
+flowchart LR
+    subgraph P1["Phase 1 · Foundations"]
+        M01[01 · Terminal] --> M02[02 · Files & Perms] --> M03[03 · Processes]
+    end
+    subgraph P2["Phase 2 · Internals"]
+        M04[04 · How Linux Boots]
+    end
+    subgraph P3["Phase 3 · Scripting"]
+        M05[05 · Bash Basics] --> M06[06 · Bash Advanced] --> M07[07 · grep/sed/awk]
+    end
+    subgraph P4["Phase 4 · System Administration"]
+        M08[08 · Users] --> M09[09 · Networking] --> M10[10 · Storage]
+        M10 --> M11[11 · Packages] --> M12[12 · systemd] --> M13[13 · Logs] --> M14[14 · Backups]
+    end
+    subgraph P5["Phase 5 · Systems Programming (C)"]
+        M15[15 · Syscalls] --> M16[16 · fork/exec] --> M17[17 · Files & I/O]
+    end
+    subgraph P6["Phase 6 · Security"]
+        M18[18 · Hardening] --> M19[19 · Pentesting] --> M20[20 · Capstone 🎓]
+    end
+    P1 --> P2 --> P3 --> P4 --> P5 --> P6
+```
+
+> 💡 If your viewer doesn't render Mermaid, open this README on GitHub or in any Markdown viewer with Mermaid support (VS Code, Obsidian, etc.). All diagrams below are Mermaid.
+
 ---
 
 ## How this course works
@@ -35,6 +73,35 @@ You need a Linux system to practice on. Pick one:
 - **Avoid for now:** Using your main daily-driver Linux machine. You'll be experimenting and breaking things on purpose.
 
 See [`resources/setup-your-lab.md`](resources/setup-your-lab.md) for a full setup guide.
+
+---
+
+## 📚 The five books at a glance
+
+```mermaid
+mindmap
+  root((5 Books))
+    HLW
+      How Linux Works
+      Brian Ward
+      Internals & mental models
+    LCLSB
+      Command Line & Bash
+      Blum & Bresnahan
+      Daily driving the shell
+    TLPI
+      The Linux Programming Interface
+      Michael Kerrisk
+      Kernel API in C
+    ULSAH
+      UNIX & Linux SysAdmin Handbook
+      Nemeth et al.
+      Running real systems
+    MPTG
+      Metasploit Pentester's Guide
+      Kennedy et al.
+      Offensive security
+```
 
 ---
 

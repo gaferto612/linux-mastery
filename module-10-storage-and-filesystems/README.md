@@ -2,6 +2,47 @@
 
 **Phase:** System administration · **Time:** ~2 weeks · **Prereq:** Module 09
 
+---
+
+## 🧱 The four storage layers
+
+```mermaid
+flowchart TB
+    A[Physical disk<br/>/dev/sda] --> B[Partition<br/>/dev/sda1]
+    B --> C[Filesystem<br/>ext4 / xfs / btrfs]
+    C --> D[Mount point<br/>/home, /var, /]
+    D --> U([👤 your files])
+```
+
+```
+   lsblk     →  shows disks + partitions  (layers 1–2)
+   blkid     →  shows filesystem types     (layer 3)
+   mount     →  shows what's mounted where (layer 4)
+   df -h     →  free space per filesystem
+   du -sh *  →  size of each thing here
+```
+
+## 📄 /etc/fstab — line dissected
+
+```
+UUID=abc-123-…   /data    ext4    defaults,noatime   0   2
+       │           │       │           │             │   │
+   what to mount  where  fstype      options        dump fsck-order
+                                                          (0=skip, 1=root, 2=others)
+```
+
+> ⚠️ Always identify by **UUID** (or LABEL), not `/dev/sdb1` — device names can shuffle on reboot.
+
+## 🧅 Optional LVM stack (when you want flexibility)
+
+```
+   PV  Physical Volume   →  raw disk / partition (e.g. /dev/sdb1)
+   VG  Volume Group      →  pool of PVs
+   LV  Logical Volume    →  slice of the VG → formatted with a filesystem
+```
+
+---
+
 ## What you'll learn
 
 - Disks, partitions, filesystems — three different things

@@ -2,6 +2,56 @@
 
 **Phase:** Bash scripting · **Time:** ~3 weeks · **Prereq:** Module 04
 
+---
+
+## 🧬 Anatomy of a bash script
+
+```
+┌────────────────────────────────────────────────────┐
+│ #!/bin/bash             ← shebang: which interpreter│
+│                                                    │
+│ name="${1:-world}"      ← argument with default    │
+│                                                    │
+│ if [[ -z "$name" ]]; then                          │
+│   echo "no name" >&2    ← write to stderr          │
+│   exit 1                ← non-zero = failure       │
+│ fi                                                 │
+│                                                    │
+│ echo "hello, $name"     ← stdout (default)         │
+└────────────────────────────────────────────────────┘
+   make executable:  chmod +x hello.sh
+   run it:           ./hello.sh Alice
+```
+
+## 🔀 Control flow at a glance
+
+```mermaid
+flowchart LR
+    start([read input]) --> cond{condition?}
+    cond -- true --> then[then-branch]
+    cond -- false --> else[else-branch]
+    then --> loop{more items?}
+    else --> loop
+    loop -- yes --> cond
+    loop -- no --> done([exit 0])
+```
+
+## 🚰 Streams & redirection
+
+```
+   stdin (0) ──→ ┌─────────┐ ──→ stdout (1)
+                 │ program │
+                 └─────────┘ ──→ stderr (2)
+
+   echo hi  >  out.txt      # stdout to file (overwrite)
+   echo hi  >> out.txt      # stdout to file (append)
+   cmd  2>  err.log         # stderr to file
+   cmd  &>  all.log         # both
+   cmd1 |   cmd2            # stdout of cmd1 → stdin of cmd2
+```
+
+---
+
 ## What you'll learn
 
 - Writing your first scripts: shebang, permissions, execution

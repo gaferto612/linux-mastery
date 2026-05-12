@@ -6,6 +6,42 @@
 
 ---
 
+## 🖥️ How your keystrokes become actions
+
+```mermaid
+sequenceDiagram
+    actor You
+    participant Terminal as Terminal Emulator
+    participant Shell as Bash (the shell)
+    participant Kernel
+    You->>Terminal: types "ls /etc"
+    Terminal->>Shell: line of text
+    Shell->>Shell: parse & expand
+    Shell->>Kernel: execve("/usr/bin/ls", ["ls","/etc"])
+    Kernel-->>Terminal: program output
+    Terminal-->>You: pixels on screen
+```
+
+> **Mental model:** the shell is just another program. Its only job is to read what you type, turn it into a syscall, and print the result.
+
+## 🌳 The filesystem at a glance
+
+```
+/
+├── bin/   → essential commands (ls, cp, mv...)
+├── boot/  → kernel + boot loader files
+├── dev/   → devices as files (/dev/sda, /dev/null)
+├── etc/   → system config (text files!)
+├── home/  → user homes (you live here)
+│   └── you/
+├── proc/  → live kernel info ("virtual" files)
+├── tmp/   → scratch space, wiped on reboot
+├── usr/   → most programs and their data
+└── var/   → things that change (logs, mail, caches)
+```
+
+---
+
 ## What you'll learn
 
 By the end of this module, you'll be able to:

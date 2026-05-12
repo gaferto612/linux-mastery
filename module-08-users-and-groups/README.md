@@ -2,6 +2,48 @@
 
 **Phase:** System administration · **Time:** ~2 weeks · **Prereq:** Module 07
 
+---
+
+## 🗂️ The three account files — dissected
+
+```
+/etc/passwd     (world-readable, no passwords here)
+─────────────────────────────────────────────────────
+alice : x : 1001 : 1001 : Alice Doe : /home/alice : /bin/bash
+  │     │    │      │        │            │             │
+  user  pwd  UID   GID     GECOS        home         login shell
+        ↑ "x" = real hash lives in /etc/shadow
+
+/etc/shadow     (root-only)
+─────────────────────────────────────────────────────
+alice : $6$saltsalt$hashhashhash... : 19876 : 0 : 99999 : 7 : : :
+         │                            │             │
+       password hash ($6=SHA-512)   last change  max age days
+
+/etc/group
+─────────────────────────────────────────────────────
+sudo : x : 27 : alice,bob
+                 └─── members
+```
+
+## 🔐 sudo decision flow
+
+```mermaid
+flowchart TD
+    A[alice runs: sudo apt update] --> B{is alice in /etc/sudoers?}
+    B -- no --> X([❌ logged, denied])
+    B -- yes --> C{rule allows this command?}
+    C -- no --> X
+    C -- yes --> D{NOPASSWD set?}
+    D -- no --> P[prompt password]
+    P -- correct --> R[run as root]
+    P -- wrong --> X
+    D -- yes --> R
+    R --> L([✅ logged in journal])
+```
+
+---
+
 ## What you'll learn
 
 - `/etc/passwd`, `/etc/shadow`, `/etc/group` — what's in them and why
