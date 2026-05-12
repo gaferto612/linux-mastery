@@ -6,19 +6,21 @@
 
 ## 📜 How logs flow on a modern Linux box
 
-```mermaid
-flowchart LR
-    K[kernel] --> J[(journald<br/>binary journal)]
-    A[apps via syslog] --> J
-    sd[systemd units] --> J
-    J --> R[rsyslog]
-    R --> F1["/var/log/syslog"]
-    R --> F2["/var/log/auth.log"]
-    R --> F3["/var/log/kern.log"]
-    F1 --> LR[logrotate<br/>daily]
-    F2 --> LR
-    F3 --> LR
-    J --> QC["journalctl -u svc -f<br/>(query language)"]
+```
+   kernel ─────────────┐
+   apps via syslog ────┼──▶ journald (binary journal) ──┬──▶ journalctl -u svc -f
+   systemd units ──────┘                                │     (query language)
+                                                        ▼
+                                                     rsyslog
+                                                        │
+                              ┌─────────────────────────┼─────────────────────────┐
+                              ▼                         ▼                         ▼
+                       /var/log/syslog          /var/log/auth.log         /var/log/kern.log
+                              │                         │                         │
+                              └─────────────────────────┴─────────────────────────┘
+                                                        │
+                                                        ▼
+                                                logrotate (daily)
 ```
 
 ## 🩻 "What's slow?" — the tool ladder
@@ -89,3 +91,7 @@ In `exercises/`:
 - Disk-full incidents stop surprising you
 
 → [Module 14](../module-14-backups-and-automation/README.md)
+
+---
+
+**Navigate:** [← Previous module](../module-12-services-and-systemd/README.md) · [🏠 Home](../README.md) · [Next module →](../module-14-backups-and-automation/README.md)

@@ -13,33 +13,44 @@ Built around five classic books, designed for ~3 hours/week.
 └───────────────────────────────────────────────────────────────────────┘
 ```
 
-## 🗺️ Visual roadmap
+## Quick navigation
 
-```mermaid
-flowchart LR
-    subgraph P1["Phase 1 · Foundations"]
-        M01[01 · Terminal] --> M02[02 · Files & Perms] --> M03[03 · Processes]
-    end
-    subgraph P2["Phase 2 · Internals"]
-        M04[04 · How Linux Boots]
-    end
-    subgraph P3["Phase 3 · Scripting"]
-        M05[05 · Bash Basics] --> M06[06 · Bash Advanced] --> M07[07 · grep/sed/awk]
-    end
-    subgraph P4["Phase 4 · System Administration"]
-        M08[08 · Users] --> M09[09 · Networking] --> M10[10 · Storage]
-        M10 --> M11[11 · Packages] --> M12[12 · systemd] --> M13[13 · Logs] --> M14[14 · Backups]
-    end
-    subgraph P5["Phase 5 · Systems Programming (C)"]
-        M15[15 · Syscalls] --> M16[16 · fork/exec] --> M17[17 · Files & I/O]
-    end
-    subgraph P6["Phase 6 · Security"]
-        M18[18 · Hardening] --> M19[19 · Pentesting] --> M20[20 · Capstone 🎓]
-    end
-    P1 --> P2 --> P3 --> P4 --> P5 --> P6
+- [How this course works](#how-this-course-works)
+- [Before you start](#before-you-start)
+- [The five books](#the-five-books-youll-use)
+- [The roadmap](#the-roadmap)
+- [How to use each module](#how-to-use-each-module)
+- [Cheatsheets](#cheatsheets) · [Progress tracker](progress/tracker.md) · [Setup guide](resources/setup-your-lab.md) · [Further reading](resources/further-reading.md)
+
+---
+
+## Visual roadmap
+
 ```
-
-> 💡 If your viewer doesn't render Mermaid, open this README on GitHub or in any Markdown viewer with Mermaid support (VS Code, Obsidian, etc.). All diagrams below are Mermaid.
+PHASE 1 · Foundations
+  01 Terminal  →  02 Files & Perms  →  03 Processes
+        │
+        ▼
+PHASE 2 · Internals
+  04 How Linux Boots
+        │
+        ▼
+PHASE 3 · Scripting
+  05 Bash Basics  →  06 Bash Advanced  →  07 grep/sed/awk
+        │
+        ▼
+PHASE 4 · System Administration
+  08 Users  →  09 Networking  →  10 Storage  →  11 Packages
+        →  12 systemd  →  13 Logs  →  14 Backups
+        │
+        ▼
+PHASE 5 · Systems Programming (C)
+  15 Syscalls  →  16 fork/exec  →  17 Files & I/O
+        │
+        ▼
+PHASE 6 · Security
+  18 Hardening  →  19 Pentesting  →  20 Capstone
+```
 
 ---
 
@@ -76,32 +87,15 @@ See [`resources/setup-your-lab.md`](resources/setup-your-lab.md) for a full setu
 
 ---
 
-## 📚 The five books at a glance
+## The five books at a glance
 
-```mermaid
-mindmap
-  root((5 Books))
-    HLW
-      How Linux Works
-      Brian Ward
-      Internals & mental models
-    LCLSB
-      Command Line & Bash
-      Blum & Bresnahan
-      Daily driving the shell
-    TLPI
-      The Linux Programming Interface
-      Michael Kerrisk
-      Kernel API in C
-    ULSAH
-      UNIX & Linux SysAdmin Handbook
-      Nemeth et al.
-      Running real systems
-    MPTG
-      Metasploit Pentester's Guide
-      Kennedy et al.
-      Offensive security
-```
+| Book | Author | Focus |
+|---|---|---|
+| **HLW** — How Linux Works | Brian Ward | Internals & mental models |
+| **LCLSB** — Linux Command Line & Shell Scripting Bible | Blum & Bresnahan | Daily driving the shell |
+| **TLPI** — The Linux Programming Interface | Michael Kerrisk | Kernel API in C |
+| **ULSAH** — UNIX & Linux SysAdmin Handbook | Nemeth et al. | Running real systems |
+| **MPTG** — Metasploit: The Penetration Tester's Guide | Kennedy et al. | Offensive security |
 
 ---
 
@@ -198,8 +192,20 @@ If you fall behind: that's fine. This is a marathon. Skip the deadline, not the 
 
 ---
 
+## Cheatsheets
+
+Quick references you can keep open while you work:
+
+- [bash](cheatsheets/bash.md)
+- [permissions](cheatsheets/permissions.md)
+- [networking](cheatsheets/networking.md)
+- [systemd](cheatsheets/systemd.md)
+- [vim survival](cheatsheets/vim-survival.md)
+
+---
+
 ## Where to start
 
-→ [`module-01-terminal-basics/README.md`](module-01-terminal-basics/README.md)
+→ [Module 01 — Terminal basics](module-01-terminal-basics/README.md)
 
 Good luck. You'll be surprised how far you get in a year.

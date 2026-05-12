@@ -6,15 +6,29 @@
 
 ## 🧪 Anatomy of THE pipeline
 
-```mermaid
-flowchart LR
-    log["access.log"] --> grep["grep 404"]
-    grep --> cut["awk '{print $1}'<br/>extract IP"]
-    cut --> sort["sort"]
-    sort --> uniq["uniq -c<br/>count dupes"]
-    uniq --> sort2["sort -rn<br/>desc by count"]
-    sort2 --> head["head -10"]
-    head --> out([Top 10 IPs<br/>causing 404s])
+```
+  access.log
+       │
+       ▼
+  grep 404
+       │
+       ▼
+  awk '{print $1}'      (extract IP)
+       │
+       ▼
+  sort
+       │
+       ▼
+  uniq -c               (count dupes)
+       │
+       ▼
+  sort -rn              (desc by count)
+       │
+       ▼
+  head -10
+       │
+       ▼
+  Top 10 IPs causing 404s
 ```
 
 > ☝️ This 6-stage one-liner is the Unix philosophy in 80 columns. Memorize the **shape**, not the commands.
@@ -94,3 +108,7 @@ In `exercises/`:
 - You reach for `awk` instead of writing a 10-line bash loop
 
 → [Module 08](../module-08-users-and-groups/README.md)
+
+---
+
+**Navigate:** [← Previous module](../module-06-shell-scripting-advanced/README.md) · [🏠 Home](../README.md) · [Next module →](../module-08-users-and-groups/README.md)

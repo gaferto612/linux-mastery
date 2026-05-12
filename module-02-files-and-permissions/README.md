@@ -25,16 +25,17 @@
 
 ## 🔗 Hard link vs symlink
 
-```mermaid
-flowchart LR
-    subgraph Hardlink["Hard link — two names, one inode"]
-        A1[name: foo.txt] --> I1[(inode #42<br/>data blocks)]
-        A2[name: bar.txt] --> I1
-    end
-    subgraph Symlink["Symlink — pointer to a name"]
-        B1[name: foo.txt] --> I2[(inode #99)]
-        B2[name: link.txt] -. points to .-> B1
-    end
+```
+Hard link — two names, one inode
+    name: foo.txt ──┐
+                    ├──> inode #42 (data blocks)
+    name: bar.txt ──┘
+
+Symlink — pointer to a name
+    name: foo.txt  ──> inode #99 (data blocks)
+                        ▲
+                        │  (points to "foo.txt")
+    name: link.txt  ────┘
 ```
 
 > Delete `foo.txt`: hard-linked `bar.txt` still works. Symlinked `link.txt` becomes a dangling pointer.
@@ -90,3 +91,7 @@ You'll:
 - You can explain a symlink to a friend
 
 → [Module 03](../module-03-processes-and-jobs/README.md)
+
+---
+
+**Navigate:** [← Previous module](../module-01-terminal-basics/README.md) · [🏠 Home](../README.md) · [Next module →](../module-03-processes-and-jobs/README.md)

@@ -6,12 +6,24 @@
 
 ## 🧱 The four storage layers
 
-```mermaid
-flowchart TB
-    A[Physical disk<br/>/dev/sda] --> B[Partition<br/>/dev/sda1]
-    B --> C[Filesystem<br/>ext4 / xfs / btrfs]
-    C --> D[Mount point<br/>/home, /var, /]
-    D --> U([👤 your files])
+```
+   ┌──────────────────────────┐
+   │ Physical disk  /dev/sda  │
+   └────────────┬─────────────┘
+                ▼
+   ┌──────────────────────────┐
+   │ Partition      /dev/sda1 │
+   └────────────┬─────────────┘
+                ▼
+   ┌──────────────────────────┐
+   │ Filesystem  ext4/xfs/btrfs│
+   └────────────┬─────────────┘
+                ▼
+   ┌──────────────────────────┐
+   │ Mount point /home,/var,/ │
+   └────────────┬─────────────┘
+                ▼
+            👤 your files
 ```
 
 ```
@@ -84,3 +96,7 @@ In `exercises/`:
 - You can answer "why is my disk full?" with confidence
 
 → [Module 11](../module-11-package-management/README.md)
+
+---
+
+**Navigate:** [← Previous module](../module-09-networking/README.md) · [🏠 Home](../README.md) · [Next module →](../module-11-package-management/README.md)

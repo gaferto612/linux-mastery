@@ -6,15 +6,30 @@
 
 ## 🍴 fork() returns twice — the mind-bender
 
-```mermaid
-flowchart TB
-    A[parent: pid=100] -->|fork| split{ }
-    split -->|returns child's pid 101| P[parent continues<br/>pid=100]
-    split -->|returns 0| C[child runs<br/>pid=101]
-    C -->|exec ls| C2[/usr/bin/ls now runs<br/>same pid=101/]
-    P -->|wait| W[blocks until child exits]
-    C2 -->|exit| W
-    W --> Z[parent resumes]
+```
+   parent: pid=100
+        │
+        │  fork()
+        ▼
+      ┌─┴─┐
+      │   │
+   returns 101 (child's pid)    returns 0
+      │                            │
+      ▼                            ▼
+   parent continues           child runs
+   pid=100                    pid=101
+      │                            │
+      │                            │  exec ls
+      │                            ▼
+      │                       /usr/bin/ls now runs
+      │                       (same pid=101)
+      │                            │
+      │  wait()                    │  exit
+      ▼                            │
+   blocks until child exits ◀──────┘
+      │
+      ▼
+   parent resumes
 ```
 
 ```c
@@ -96,3 +111,7 @@ In `exercises/`:
 - You can explain what a zombie is
 
 → [Module 17](../module-17-files-and-io/README.md)
+
+---
+
+**Navigate:** [← Previous module](../module-15-systems-programming-intro/README.md) · [🏠 Home](../README.md) · [Next module →](../module-17-files-and-io/README.md)

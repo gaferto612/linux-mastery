@@ -22,19 +22,16 @@
 
 ## 🧮 Backup strategies compared
 
-```mermaid
-flowchart TB
-    subgraph Full["Full only"]
-        F1[Mon: FULL] --> F2[Tue: FULL] --> F3[Wed: FULL]
-    end
-    subgraph Incr["Full + incremental"]
-        I1[Sun: FULL] --> I2[Mon: diff] --> I3[Tue: diff] --> I4[Wed: diff]
-    end
-    subgraph Dedup["Dedup (restic/borg)"]
-        D1[snapshot] --> D2[snapshot] --> D3[snapshot]
-        D1 -. shares blocks .- D2
-        D2 -. shares blocks .- D3
-    end
+```
+   Full only
+     Mon: FULL ──▶ Tue: FULL ──▶ Wed: FULL
+
+   Full + incremental
+     Sun: FULL ──▶ Mon: diff ──▶ Tue: diff ──▶ Wed: diff
+
+   Dedup (restic/borg)
+     snapshot ──▶ snapshot ──▶ snapshot
+        └─ shares blocks ─┴─ shares blocks ─┘
 ```
 
 ## ⏰ cron vs systemd timer
@@ -100,3 +97,7 @@ In `exercises/`:
 - Cron and timers feel interchangeable
 
 → [Module 15](../module-15-systems-programming-intro/README.md)
+
+---
+
+**Navigate:** [← Previous module](../module-13-logging-and-monitoring/README.md) · [🏠 Home](../README.md) · [Next module →](../module-15-systems-programming-intro/README.md)

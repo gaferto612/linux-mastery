@@ -30,17 +30,16 @@
 
 ## 🔬 strace: watching the boundary
 
-```mermaid
-sequenceDiagram
-    participant App as ./hello
-    participant libc
-    participant Kernel
-    App->>libc: printf("hi\n")
-    libc->>libc: format string
-    libc->>Kernel: write(1, "hi\n", 3)
-    Kernel-->>libc: 3
-    libc-->>App: returns 3
-    Note over App,Kernel: strace shows the write() call,<br/>not the printf().
+```
+   ./hello             libc              Kernel
+      │                  │                  │
+      │── printf("hi\n")─▶                  │
+      │                  │ format string    │
+      │                  │── write(1,"hi\n",3) ─▶
+      │                  │◀───── 3 ─────────│
+      │◀── returns 3 ────│                  │
+      │                                     │
+   Note: strace shows the write() call, not the printf().
 ```
 
 ## 🧠 Process memory layout
@@ -111,3 +110,7 @@ In `exercises/`:
 - You can name 5 syscalls and what they do
 
 → [Module 16](../module-16-processes-and-signals/README.md)
+
+---
+
+**Navigate:** [← Previous module](../module-14-backups-and-automation/README.md) · [🏠 Home](../README.md) · [Next module →](../module-16-processes-and-signals/README.md)

@@ -6,16 +6,32 @@
 
 ## ⚡ Power-on → login prompt
 
-```mermaid
-flowchart TB
-    A[🔌 Power on] --> B["BIOS / UEFI<br/>POST + find boot device"]
-    B --> C["Bootloader (GRUB)<br/>loads kernel + initramfs"]
-    C --> D["Linux kernel<br/>self-init, drivers, mount initramfs"]
-    D --> E["initramfs<br/>tiny RAM filesystem"]
-    E --> F["Pivot to real /<br/>(your actual disk)"]
-    F --> G["PID 1 · systemd<br/>brings up units"]
-    G --> H["multi-user.target<br/>or graphical.target"]
-    H --> I[🖥️  login prompt]
+```
+🔌 Power on
+     │
+     ▼
+BIOS / UEFI                       (POST + find boot device)
+     │
+     ▼
+Bootloader (GRUB)                 (loads kernel + initramfs)
+     │
+     ▼
+Linux kernel                      (self-init, drivers, mount initramfs)
+     │
+     ▼
+initramfs                         (tiny RAM filesystem)
+     │
+     ▼
+Pivot to real /                   (your actual disk)
+     │
+     ▼
+PID 1 · systemd                   (brings up units)
+     │
+     ▼
+multi-user.target / graphical.target
+     │
+     ▼
+🖥️  login prompt
 ```
 
 ## 🎯 systemd targets at a glance
@@ -79,3 +95,7 @@ In `exercises/`:
 - You know how to recover when boot fails
 
 → [Module 05](../module-05-shell-scripting-basics/README.md)
+
+---
+
+**Navigate:** [← Previous module](../module-03-processes-and-jobs/README.md) · [🏠 Home](../README.md) · [Next module →](../module-05-shell-scripting-basics/README.md)

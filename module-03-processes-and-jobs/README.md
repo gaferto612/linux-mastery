@@ -6,16 +6,34 @@
 
 ## 🔄 The life of a process
 
-```mermaid
-stateDiagram-v2
-    [*] --> Running: fork() + exec()
-    Running --> Sleeping: waits for I/O
-    Sleeping --> Running: I/O ready
-    Running --> Stopped: Ctrl-Z / SIGSTOP
-    Stopped --> Running: fg / bg / SIGCONT
-    Running --> Zombie: exit()
-    Zombie --> [*]: parent calls wait()
 ```
+   (start)
+      │ fork() + exec()
+      ▼
+  ┌─────────┐  waits for I/O   ┌──────────┐
+  │ Running │ ───────────────> │ Sleeping │
+  │         │ <─────────────── │          │
+  └─────────┘   I/O ready      └──────────┘
+      │  ▲
+      │  │ fg / bg / SIGCONT
+      │ Ctrl-Z / SIGSTOP
+      ▼  │
+  ┌─────────┐
+  │ Stopped │
+  └─────────┘
+      │
+      │ exit()
+      ▼
+  ┌─────────┐
+  │ Zombie  │ ──── parent calls wait() ────> (end)
+  └─────────┘
+```
+
+- **Start → Running:** `fork()` + `exec()` create the process.
+- **Running ↔ Sleeping:** process blocks while waiting for I/O, wakes when ready.
+- **Running → Stopped:** `Ctrl-Z` / `SIGSTOP` suspends it.
+- **Stopped → Running:** `fg`, `bg`, or `SIGCONT` resumes it.
+- **Running → Zombie → End:** process calls `exit()`, then disappears once the parent calls `wait()`.
 
 ## 📡 Common signals — the cheat card
 
@@ -34,15 +52,16 @@ stateDiagram-v2
 
 ## 🌲 The process tree
 
-```mermaid
-flowchart TD
-    init["PID 1 · systemd"] --> sshd["sshd"] --> bash["your bash"]
-    bash --> vim["vim"]
-    bash --> ls["ls"]
-    init --> cron["cron"]
-    init --> nginx["nginx (master)"]
-    nginx --> w1["worker 1"]
-    nginx --> w2["worker 2"]
+```
+PID 1 · systemd
+    ├── sshd
+    │     └── your bash
+    │           ├── vim
+    │           └── ls
+    ├── cron
+    └── nginx (master)
+          ├── worker 1
+          └── worker 2
 ```
 
 ---
@@ -88,3 +107,7 @@ In `exercises/`:
 - `ps aux | grep something` is in your muscle memory
 
 → [Module 04](../module-04-how-linux-boots/README.md)
+
+---
+
+**Navigate:** [← Previous module](../module-02-files-and-permissions/README.md) · [🏠 Home](../README.md) · [Next module →](../module-04-how-linux-boots/README.md)
