@@ -110,46 +110,46 @@ mindmap
 ### Phase 1 — Foundations (Months 1–2)
 You learn to live in the terminal. By the end you should be comfortable navigating, manipulating files, and not panicking when something looks weird.
 
-- **Module 01** — Terminal basics
-- **Module 02** — Files and permissions
-- **Module 03** — Processes and jobs
+- [**Module 01**](module-01-terminal-basics/README.md) — Terminal basics
+- [**Module 02**](module-02-files-and-permissions/README.md) — Files and permissions
+- [**Module 03**](module-03-processes-and-jobs/README.md) — Processes and jobs
 
 ### Phase 2 — How Linux actually works (Month 3)
 You stop seeing Linux as magic. You understand what happens between power-on and login prompt.
 
-- **Module 04** — How Linux boots
+- [**Module 04**](module-04-how-linux-boots/README.md) — How Linux boots
 
 ### Phase 3 — Bash scripting (Months 4–5)
 The single most leveraged skill on Linux. Once you can script, you can automate anything.
 
-- **Module 05** — Shell scripting basics
-- **Module 06** — Shell scripting advanced
-- **Module 07** — Text processing (grep, sed, awk)
+- [**Module 05**](module-05-shell-scripting-basics/README.md) — Shell scripting basics
+- [**Module 06**](module-06-shell-scripting-advanced/README.md) — Shell scripting advanced
+- [**Module 07**](module-07-text-processing/README.md) — Text processing (grep, sed, awk)
 
 ### Phase 4 — System administration (Months 6–8)
 You can now manage a real Linux system: users, networks, disks, services, logs.
 
-- **Module 08** — Users and groups
-- **Module 09** — Networking
-- **Module 10** — Storage and filesystems
-- **Module 11** — Package management
-- **Module 12** — Services and systemd
-- **Module 13** — Logging and monitoring
-- **Module 14** — Backups and automation
+- [**Module 08**](module-08-users-and-groups/README.md) — Users and groups
+- [**Module 09**](module-09-networking/README.md) — Networking
+- [**Module 10**](module-10-storage-and-filesystems/README.md) — Storage and filesystems
+- [**Module 11**](module-11-package-management/README.md) — Package management
+- [**Module 12**](module-12-services-and-systemd/README.md) — Services and systemd
+- [**Module 13**](module-13-logging-and-monitoring/README.md) — Logging and monitoring
+- [**Module 14**](module-14-backups-and-automation/README.md) — Backups and automation
 
 ### Phase 5 — Systems programming (Months 9–10)
 You write C programs that talk to the kernel directly. This is where Linux stops being a black box.
 
-- **Module 15** — Systems programming intro
-- **Module 16** — Processes and signals
-- **Module 17** — Files and I/O
+- [**Module 15**](module-15-systems-programming-intro/README.md) — Systems programming intro
+- [**Module 16**](module-16-processes-and-signals/README.md) — Processes and signals
+- [**Module 17**](module-17-files-and-io/README.md) — Files and I/O
 
 ### Phase 6 — Security (Months 11–12)
 Now that you understand the system, you can learn how to defend it — and how it gets attacked.
 
-- **Module 18** — Security fundamentals
-- **Module 19** — Intro to pentesting
-- **Module 20** — Capstone projects
+- [**Module 18**](module-18-security-fundamentals/README.md) — Security fundamentals
+- [**Module 19**](module-19-intro-to-pentesting/README.md) — Intro to pentesting
+- [**Module 20**](module-20-capstone-projects/README.md) — Capstone projects
 
 ---
 
