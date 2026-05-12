@@ -83,3 +83,7 @@ Watch your contribution graph fill in. It's surprisingly motivating.
 - `.gitignore` — list files git should ignore (e.g., `*.log`, `secrets.txt`)
 
 If git confuses you (it will), [oh-shit-git.com](https://ohshitgit.com/) is the kindest reference on the internet.
+
+---
+
+[← Back to course home](../README.md)

@@ -117,3 +117,7 @@ find . -perm -u+x,-g+x      # both owner AND group execute set
 - Permissions on a symlink are usually ignored — the target's matter.
 - A user can read a file only if they have `x` on every directory in its path.
 - `rm` doesn't need write permission *on the file* — it needs write+execute on the *parent directory*.
+
+---
+
+[← Back to course home](../README.md)

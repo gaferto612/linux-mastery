@@ -62,3 +62,7 @@ sudo apt install tldr tree htop ncdu jq ripgrep fd-find bat tmux
 - `fd-find` (`fd`) — find but friendlier
 - `bat` — cat with syntax highlighting
 - `tmux` — terminal multiplexer; keeps sessions alive on remote hosts
+
+---
+
+[← Back to course home](../README.md)

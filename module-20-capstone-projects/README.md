@@ -8,6 +8,8 @@ A capstone is **proof of skill** — to yourself, to future employers, to your f
 
 ---
 
+**In this module:** [📋 Projects](projects/README.md) · [📝 Notes](notes/my-notes.md)
+
 ## 🛤️ Pick your path
 
 ```

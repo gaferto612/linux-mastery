@@ -6,6 +6,8 @@
 
 ---
 
+**In this module:** [📋 Exercises](exercises/README.md) · [✅ Solutions](solutions/README.md) · [📝 Notes](notes/my-notes.md)
+
 ## 🖥️ How your keystrokes become actions
 
 ```

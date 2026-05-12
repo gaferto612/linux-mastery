@@ -4,6 +4,8 @@
 
 ---
 
+**In this module:** [📋 Exercises](exercises/README.md) · [✅ Solutions](solutions/README.md) · [📝 Notes](notes/my-notes.md)
+
 ## 🚪 The kernel / user-space boundary
 
 ```

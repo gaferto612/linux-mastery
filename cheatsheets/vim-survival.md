@@ -62,3 +62,7 @@ export EDITOR=nano               # add to .bashrc to make permanent
 `nano` is friendlier. Most servers have it. Use it without shame.
 
 But: vim is everywhere, including bare-bones rescue systems. Knowing those 6 commands has saved many a sysadmin.
+
+---
+
+[← Back to course home](../README.md)
